@@ -20,7 +20,7 @@ frame_width = int(cap.get(3))
 frame_height = int(cap.get(4))
 
 # Define the codec and create VideoWriter object.The output is stored in 'outpy.avi' file.
-#out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
+out = cv2.VideoWriter('save.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
 
 while(True):
   ret, frame = cap.read()
@@ -28,11 +28,12 @@ while(True):
   if ret == True: 
     
     # Write the frame into the file 'output.avi'
-    #out.write(frame)
     img = create_data(None, frame)
     box = yolo_predict_image(img)
     image = frame.reshape(-1, frame.shape[0], frame.shape[1], frame.shape[2])
     image = show_image(box, image, None, None)
+
+    out.write(image)
 
     # Display the resulting frame    
     cv2.imshow('frame',image)
@@ -47,7 +48,7 @@ while(True):
 
 # When everything done, release the video capture and video write objects
 cap.release()
-#out.release()
+out.release()
 
 # Closes all the frames
 cv2.destroyAllWindows()
