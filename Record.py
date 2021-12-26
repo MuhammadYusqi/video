@@ -4,7 +4,7 @@ import numpy as np
 
 
 # Create a VideoCapture object
-cap = cv2.VideoCapture("outpy.avi")
+cap = cv2.VideoCapture(0)
 
 # Check if camera opened successfully
 if (cap.isOpened() == False): 
@@ -26,9 +26,8 @@ while(True):
     # Write the frame into the file 'output.avi'
     out.write(frame)
 
-    img = create_data(None, frame)
     # Display the resulting frame    
-    cv2.imshow('frame',image)
+    cv2.imshow('frame',frame)
 
     # Press Q on keyboard to stop recording
     if cv2.waitKey(1) & 0xFF == ord('q'):
